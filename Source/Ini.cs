@@ -27,6 +27,13 @@ namespace Trayscout
             return value;
         }
 
+        public string ReadOptionalString(string section, string key, string defaultValue = "")
+        {
+            StringBuilder sb = new StringBuilder(255);
+            GetPrivateProfileString(section, key, defaultValue, sb, 255, _filePath);
+            return sb.ToString();
+        }
+
         public int ReadInt(string section, string key)
         {
             string value = ReadString(section, key);

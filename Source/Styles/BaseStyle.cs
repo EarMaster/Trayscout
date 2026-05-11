@@ -18,10 +18,10 @@ namespace Trayscout
 
         public Image DrawDiagram(Configuration config, IList<Entry> entries)
         {
-            return DrawDiagram(config.Width, config.Height, config.FontFamily, config.FontSize, config.High, config.Low, config.TimeRange, entries, config.Unit);
+            return DrawDiagram(config.Width, config.Height, config.FontFamily, config.FontSize, config.High, config.Low, config.TimeRange, entries, config.Unit, config.Title);
         }
 
-        public Image DrawDiagram(int width, int height, string fontFamily, int fontSize, float high, float low, int timeRange, IList<Entry> entries, Unit unit)
+        public Image DrawDiagram(int width, int height, string fontFamily, int fontSize, float high, float low, int timeRange, IList<Entry> entries, Unit unit, string title = "")
         {
             Bitmap bmp = new Bitmap(width, height);
             Graphics g = Graphics.FromImage(bmp);
@@ -45,6 +45,14 @@ namespace Trayscout
             DrawOuterBorder(g, width, height);
 
             bmp.RotateFlip(RotateFlipType.RotateNoneFlipY);
+
+            if (!string.IsNullOrEmpty(title))
+            {
+                double fontScale = fontSize / 8.0;
+                g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+                g.DrawString(title, new Font(fontFamily, fontSize), new SolidBrush(LabelColor), (int)(2 * fontScale), (int)(2 * fontScale), StringFormat.GenericDefault);
+                g.TextRenderingHint = TextRenderingHint.SystemDefault;
+            }
 
             return bmp;
         }

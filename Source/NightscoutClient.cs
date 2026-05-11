@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -153,10 +154,21 @@ namespace Trayscout
                 ico = Icon.FromHandle(bmp.GetHicon());
             }
 
+            string unitStr = _config.Unit == Unit.mmolL ? " mmol/L" : " mg/dL";
+            string valueStr = _config.Unit == Unit.mmolL
+                ? entry.Value.ToString("F1", CultureInfo.InvariantCulture)
+                : entry.Value.ToString("F0", CultureInfo.InvariantCulture);
+            string tooltip = string.IsNullOrEmpty(_config.Title)
+                ? valueStr + unitStr
+                : _config.Title + "\n" + valueStr + unitStr;
+            if (tooltip.Length > 63)
+                tooltip = tooltip.Substring(0, 63);
+
             DisposeTrayIcon();
             _trayIcon = new NotifyIcon()
             {
                 Icon = ico,
+                Text = tooltip,
                 ContextMenu = new ContextMenu(new MenuItem[] { new MenuItem("Exit", Exit) }),
                 Visible = true
             };

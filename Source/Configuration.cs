@@ -23,6 +23,7 @@ namespace Trayscout
         public int Height { get; set; }
         public string FontFamily { get; }
         public int FontSize { get; set; }
+        public string Title { get; }
 
         private IDictionary<StyleKey, Type> _styles = new Dictionary<StyleKey, Type>
         {
@@ -62,6 +63,7 @@ namespace Trayscout
             Height = ini.ReadInt("Config", "Height");
             FontFamily = ini.ReadString("Config", "FontFamily");
             FontSize = ini.ReadInt("Config", "FontSize");
+            Title = ini.ReadOptionalString("Config", "Title");
         }
 
         private string Sha1(string input)

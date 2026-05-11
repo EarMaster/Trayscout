@@ -1,5 +1,5 @@
 # Trayscout
-This lightweight Nightscout client for Windows will display your latest blood glucose value and trend in the system tray. If you click on the icon, a blood glucose diagram will be shown. Multiple styles/schemes are supported to better fit into your artificial pancreas system.
+This lightweight Nightscout client for Windows will display your latest blood glucose value and trend in the system tray. If you click on the icon, a blood glucose diagram will be shown. Multiple styles/schemes are supported to better fit into your artificial pancreas system. Multiple instances can be run simultaneously from separate folders, each with their own Config.ini.
 
 ![Preview](Preview.png)
 
@@ -19,6 +19,7 @@ A simple INI file is used for configuration:
 - Height = Height of diagram in pixel
 - FontFamily = Font family used for axis labels
 - FontSize = Font size used for axis labels
+- Title = (Optional) A label shown above the diagram and in the system tray tooltip. Useful when running multiple instances of Trayscout side by side.
 
 How to use:
 - Extract the Trayscout.zip into a folder of your choice
